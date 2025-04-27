@@ -10,64 +10,60 @@ document.addEventListener('DOMContentLoaded', () => {
     const teamCompleteSound = document.getElementById('team-complete-sound'); // Optional sound
 
     // --- Configuration ---
-    const TOTAL_MEMBERS = 41;
+    const TOTAL_MEMBERS = 38;
     const TEAM_SIZE = 4;
     const GOLDEN_CARD_ID = 7; // *** Set which member ID (1-41) gets the golden card ***
 
     // --- Member Names ---
     // !!! REPLACE THE NAMES BELOW WITH YOUR ACTUAL 41 MEMBER NAMES !!!
     const memberNames = [
-"Srinikethan",
-  "Sundharesan",
-  "Royden Jerome S",
-  "Ramkumar A",
-  "Rohith R V",
-  "Sarathi S",
-  "Tejaswini Srinivasan",
-  "Shyamsreesh Anand",
-  "Kamali B",
-  "Nivetha Senthilkumar",
-  "S. Vidhya Shree",
-  "Balamurugan C",
-  "Dhanasri Ashokraj",
-  "Sowmiyaa BGM",
-  "Carewin Rachel B",
-  "Thilaikarasi D",
-  "Baumendhra",
-  "Harikishore S",
-  "Nidthish S",
-  "Varsha Varrdhini N",
-  "Meenakshi V",
-  "Sri Vishnu S",
-  "L. Nithyakavi",
-  "Bharathi S P",
-  "Naveen R",
-  "Navin M",
-  "Yuva Preethi",
-  "L. Maha Swetha",
-  "Mathishwaran R A",
-  "Sheeba Immancy A",
-  "Niyas Ahamed N",
-  "M. Adithya Natarajan",
-  "G. Kanishka",
-  "Vivin Raj V",
-  "M. Sivaprakash",
-  "Manasa",
-  "Vignesh Rahul M",
-  "Joahua Tony A",
-  "Ramya Devi P T",
-  "Kaleeshwari",
-  "Jayasree N", // The 41st member
-        // Make sure you have exactly 41 names here.
-    ];
+        "A. Noorul Nasiha",
+        "Ajay Kumar S",
+        "Amritha A",
+        "Darshni R",
+        "Deepakram S",
+        "Dhachayini P",
+        "Dharshini D",
+        "Elancheral R",
+        "Farina Begam",
+        "G. Shri Lakshmi",
+        "Harshini",
+        "Hiranmayee R",
+        "J. Rubashri",
+        "Keerthikaran T",
+        "Kevin Antonyraj C",
+        "Leander Antony J",
+        "Madhesh S",
+        "Madhumitha C",
+        "Manasa N G",
+        "Manoj H",
+        "Maruthappan M",
+        "Mathumida S",
+        "Mohamed Farhan Hussain",
+        "Mohamed Rifays M",
+        "Niranjana M",
+        "Nivetha",
+        "Pradeepa Lakshmi K",
+        "Rishwana Fathima S",
+        "Shameel Mohamed A",
+        "Shirley Theresa V",
+        "Siva Priya P",
+        "Sivaprabha K",
+        "Sri Vathsan",
+        "Tanusri K",
+        "Tharanetharan S",
+        "Vamsi Krishnan S",
+        "Viknesh S",
+        "Vishwa I"
+      ];
 
     // --- State Variables ---
-    let allMembers = [];           // Holds all member objects {id, name, isGolden?}
-    let availableMembers = [];     // Shuffled list of members yet to be drawn
-    let currentTeam = [];          // Members drawn for the team currently being formed
-    let completedTeams = [];       // Array of completed team objects
-    let teamCounter = 0;           // Counter for team IDs
-    let isDrawing = false;         // Flag to prevent multiple draws during animation
+    let allMembers = [];           // Holds all member objects {id, name, isGolden?}
+    let availableMembers = [];     // Shuffled list of members yet to be drawn
+    let currentTeam = [];          // Members drawn for the team currently being formed
+    let completedTeams = [];       // Array of completed team objects
+    let teamCounter = 0;           // Counter for team IDs
+    let isDrawing = false;         // Flag to prevent multiple draws during animation
 
     // --- Optional Features Data ---
     const teamNamePrefixes = [
@@ -116,25 +112,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const count = Math.min(memberNames.length, TOTAL_MEMBERS); // Use the smaller count to avoid errors
         for (let i = 0; i < count; i++) {
             allMembers.push({
-                id: i + 1,             // Assign sequential IDs (1 up to 41)
-                name: memberNames[i],  // Use the name from your list
-                isGolden: false        // Initialize isGolden to false
+                id: i + 1,             // Assign sequential IDs (1 up to TOTAL_MEMBERS)
+                name: memberNames[i],  // Use the name from your list
+                isGolden: false        // Initialize isGolden to false
             });
         }
 
         // Assign Golden Card status based on ID
-        // if (GOLDEN_CARD_ID > 0 && GOLDEN_CARD_ID <= allMembers.length) {
-        //     const goldenMemberIndex = allMembers.findIndex(m => m.id === GOLDEN_CARD_ID);
-        //     if (goldenMemberIndex !== -1) {
-        //        allMembers[goldenMemberIndex].isGolden = true;
-        //        console.log(`Golden Card assigned to: ID ${GOLDEN_CARD_ID}, Name: ${allMembers[goldenMemberIndex].name}`);
-        //     } else {
-        //          // Should not happen if ID is valid, but good to check
-        //          console.warn(`Could not find member with ID ${GOLDEN_CARD_ID} internally, though ID seems valid.`);
-        //     }
-        // } else if (GOLDEN_CARD_ID > 0) {
-        //      console.warn(`Golden Card ID ${GOLDEN_CARD_ID} is out of range (1-${allMembers.length}). No golden card assigned.`);
-        // }
+        
     }
 
     // --- Core Logic ---
@@ -242,22 +227,40 @@ document.addEventListener('DOMContentLoaded', () => {
         card.classList.add('drawn');
     }
 
-    // Check if the Current Team is Complete
+    // Check if the Current Team is Complete (Modified for last two teams of 5)
     function checkTeamFormation() {
+        const totalMembersRemaining = availableMembers.length + currentTeam.length;
         let formTheTeam = false;
 
-        // Condition 1: Team reaches standard size (4)
-        if (currentTeam.length === TEAM_SIZE) {
-            // Form the team if no members are left OR if enough members remain for at least one more standard team
-            if (availableMembers.length === 0 || availableMembers.length >= TEAM_SIZE) {
-                 formTheTeam = true;
+        // Configuration for the special case
+        const numberOfLargeTeams = 2;
+        const largeTeamSize = 5;
+        const membersForLargeTeams = numberOfLargeTeams * largeTeamSize; // 2 * 5 = 10
+
+        // Condition to form a standard TEAM_SIZE team (4)
+        // Form a team of 4 only if there are more than 'membersForLargeTeams' members remaining in total.
+        // If 'membersForLargeTeams' or fewer members are remaining, the current team needs to potentially grow larger.
+        if (currentTeam.length === TEAM_SIZE) { // currentTeam has 4 members
+            if (totalMembersRemaining > membersForLargeTeams) {
+                formTheTeam = true;
             }
-            // Otherwise (1, 2, or 3 members left), wait for the next draw(s) to form the final larger team
         }
-        // Condition 2: No members left to draw, form the final team with whoever is in currentTeam
+        // Condition to form a large team (size 5)
+        else if (currentTeam.length === largeTeamSize) { // currentTeam has 5 members
+            // Form a team of 5 only if this completes one of the last two teams.
+            // This happens when total members remaining is exactly 10 (for the first size 5 team)
+            // or exactly 5 (for the last size 5 team).
+            if (totalMembersRemaining === membersForLargeTeams || totalMembersRemaining === largeTeamSize) {
+                formTheTeam = true;
+            }
+        }
+        // Fallback condition: Form the final team if no members are left in the deck.
+        // This ensures any remaining members in currentTeam are assigned if availableMembers hits 0,
+        // even if currentTeam isn't exactly 4 or 5 (though with 38 and last two being 5, it should be 5).
         else if (availableMembers.length === 0 && currentTeam.length > 0) {
-             formTheTeam = true; // Form the last team (might have 1 to 5 members)
+            formTheTeam = true;
         }
+
 
         // If conditions met, form and display the team
         if (formTheTeam) {
@@ -265,9 +268,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const newTeam = [...currentTeam]; // Copy the members
             completedTeams.push({
                 id: teamCounter,
-                name: generateTeamName(),   // Generate a fun name
+                name: generateTeamName(),   // Generate a fun name
                 members: newTeam,
-                color: getRandomColor()    // Assign a random background color
+                color: getRandomColor()    // Assign a random background color
             });
 
             displayCompletedTeam(completedTeams[completedTeams.length - 1]); // Show the team card
@@ -345,23 +348,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Trigger Confetti Animation
     function triggerConfetti() {
-         // Check if the confetti library is loaded (from the CDN in index.html)
-         if (typeof confetti === 'function') {
-             confetti({
-                 particleCount: 120, // Number of confetti pieces
-                 spread: 80,        // How far they spread horizontally
-                 origin: { y: 0.6 } // Starting point (0 = top, 1 = bottom)
-             });
-         } else {
-             console.log("🎉 Team Complete! (Confetti library not available)");
-         }
+          // Check if the confetti library is loaded (from the CDN in index.html)
+          if (typeof confetti === 'function') {
+              confetti({
+                  particleCount: 120, // Number of confetti pieces
+                  spread: 80,        // How far they spread horizontally
+                  origin: { y: 0.6 } // Starting point (0 = top, 1 = bottom)
+              });
+          } else {
+              console.log("🎉 Team Complete! (Confetti library not available)");
+          }
     }
 
     // Generate a Random Pleasant Color (HSL format)
     function getRandomColor() {
         const hue = Math.floor(Math.random() * 360); // Angle on the color wheel (0-359)
         const saturation = Math.floor(Math.random() * 30) + 70; // 70-100% (controls vibrancy)
-        const lightness = Math.floor(Math.random() * 20) + 60;  // 60-80% (controls brightness/darkness)
+        const lightness = Math.floor(Math.random() * 20) + 60;  // 60-80% (controls brightness/darkness)
         return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
     }
 
