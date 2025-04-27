@@ -123,18 +123,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Assign Golden Card status based on ID
-        if (GOLDEN_CARD_ID > 0 && GOLDEN_CARD_ID <= allMembers.length) {
-            const goldenMemberIndex = allMembers.findIndex(m => m.id === GOLDEN_CARD_ID);
-            if (goldenMemberIndex !== -1) {
-               allMembers[goldenMemberIndex].isGolden = true;
-               console.log(`Golden Card assigned to: ID ${GOLDEN_CARD_ID}, Name: ${allMembers[goldenMemberIndex].name}`);
-            } else {
-                 // Should not happen if ID is valid, but good to check
-                 console.warn(`Could not find member with ID ${GOLDEN_CARD_ID} internally, though ID seems valid.`);
-            }
-        } else if (GOLDEN_CARD_ID > 0) {
-             console.warn(`Golden Card ID ${GOLDEN_CARD_ID} is out of range (1-${allMembers.length}). No golden card assigned.`);
-        }
+        // if (GOLDEN_CARD_ID > 0 && GOLDEN_CARD_ID <= allMembers.length) {
+        //     const goldenMemberIndex = allMembers.findIndex(m => m.id === GOLDEN_CARD_ID);
+        //     if (goldenMemberIndex !== -1) {
+        //        allMembers[goldenMemberIndex].isGolden = true;
+        //        console.log(`Golden Card assigned to: ID ${GOLDEN_CARD_ID}, Name: ${allMembers[goldenMemberIndex].name}`);
+        //     } else {
+        //          // Should not happen if ID is valid, but good to check
+        //          console.warn(`Could not find member with ID ${GOLDEN_CARD_ID} internally, though ID seems valid.`);
+        //     }
+        // } else if (GOLDEN_CARD_ID > 0) {
+        //      console.warn(`Golden Card ID ${GOLDEN_CARD_ID} is out of range (1-${allMembers.length}). No golden card assigned.`);
+        // }
     }
 
     // --- Core Logic ---
