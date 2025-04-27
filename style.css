@@ -1,0 +1,240 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+:root {
+    --card-width: 80px;
+    --card-height: 110px;
+    --card-border-radius: 8px;
+    --animation-speed: 0.6s;
+    --team-card-padding: 15px;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f4f8;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align top */
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.app-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 90%;
+    max-width: 1000px;
+}
+
+h1, h2 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.controls {
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+button {
+    padding: 12px 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    background-color: #3498db;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+}
+
+button:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(0px);
+}
+
+button:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+#restart-button {
+    background-color: #e74c3c;
+    box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
+}
+#restart-button:hover {
+    background-color: #c0392b;
+}
+
+#export-button {
+    background-color: #1abc9c;
+     box-shadow: 0 4px 10px rgba(26, 188, 156, 0.3);
+}
+#export-button:hover {
+     background-color: #16a085;
+}
+
+
+.drawing-area, .teams-area {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #ecf0f1;
+    border-radius: 10px;
+}
+
+.current-draw-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    min-height: calc(var(--card-height) + 20px); /* Ensure space even when empty */
+    padding: 10px;
+}
+
+/* Card Styles */
+.card {
+    width: var(--card-width);
+    height: var(--card-height);
+    border-radius: var(--card-border-radius);
+    background: linear-gradient(135deg, #6a89cc, #b8e994); /* Default card back */
+    color: white;
+    display: flex;
+    flex-direction: column; /* Stack number and name */
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative; /* Needed for pseudo-elements or complex structure */
+    cursor: default;
+    backface-visibility: hidden; /* Important for flip */
+    transform-style: preserve-3d; /* Important for flip */
+    transition: transform var(--animation-speed) ease-in-out, background-color 0.3s ease; /* Background transition for golden card */
+    padding: 5px;
+    box-sizing: border-box; /* Include padding in size */
+    overflow: hidden; /* Hide overflow text */
+    text-align: center;
+}
+
+.card .member-id {
+    font-size: 1.8em;
+    margin-bottom: 5px; /* Space between number and name */
+}
+
+.card .member-name {
+    font-size: 0.7em; /* Smaller font for name */
+    word-break: break-word; /* Break long names */
+}
+
+/* Card Animation: Flip */
+.card.hidden {
+    /* Initially Hidden State - represents the back */
+    background: linear-gradient(135deg, #4a69bd, #78c0a8); /* Distinct Back */
+    color: transparent; /* Hide text when hidden */
+    transform: rotateY(180deg); /* Start flipped */
+}
+
+.card.drawn {
+    /* Target state: Flipped to show front */
+     transform: rotateY(0deg);
+}
+
+/* Golden Card Style */
+.card.golden {
+    background: linear-gradient(135deg, #f1c40f, #f39c12);
+    box-shadow: 0 0 15px 5px rgba(241, 196, 15, 0.7);
+    border: 2px solid gold;
+}
+.card.golden .member-id,
+.card.golden .member-name {
+    color: #4a2c00; /* Darker text for readability */
+    text-shadow: 0 0 5px white;
+}
+
+
+/* Teams Display */
+.teams-display {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.team-card {
+    background-color: #fff; /* Will be overridden by JS */
+    border-radius: 10px;
+    padding: var(--team-card-padding);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative; /* For potential confetti anchor */
+    overflow: hidden; /* Contain potential animations */
+}
+
+.team-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.team-card h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    color: #fff; /* Set high contrast for colored backgrounds */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Improve readability on light colors */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    padding-bottom: 5px;
+}
+
+.team-card h4 { /* For Team Name */
+     margin-top: 5px;
+     margin-bottom: 12px;
+     font-style: italic;
+     color: rgba(255, 255, 255, 0.9);
+     font-size: 0.95rem;
+}
+
+.team-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.team-card li {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 8px 12px;
+    margin-bottom: 6px;
+    border-radius: 5px;
+    font-size: 0.95rem;
+    color: #fff; /* Match H3 */
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+}
+
+.team-card li:last-child {
+    margin-bottom: 0;
+}
+
+/* Simple Glow animation for drawn card */
+@keyframes glow {
+    0% { box-shadow: 0 0 5px rgba(52, 152, 219, 0.5); }
+    50% { box-shadow: 0 0 15px 5px rgba(52, 152, 219, 0.8); }
+    100% { box-shadow: 0 0 5px rgba(52, 152, 219, 0.5); }
+}
+
+.card.glow-animation {
+    animation: glow 1.5s ease-in-out infinite;
+}

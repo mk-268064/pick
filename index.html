@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Team Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    </head>
+<body>
+    <div class="app-container">
+        <h1>Random Team Generator</h1>
+        <p><span id="members-left">41</span> Members Left</p>
+
+        <div class="controls">
+            <button id="draw-button">Draw Next Card</button>
+            <button id="restart-button">Shuffle & Restart</button>
+            <button id="export-button" style="display: none;">Export Teams</button>
+        </div>
+
+        <div class="drawing-area">
+            <h2>Drawing Next Team...</h2>
+            <div id="current-draw" class="current-draw-container">
+                </div>
+        </div>
+
+        <div class="teams-area">
+            <h2>Completed Teams</h2>
+            <div id="teams-container" class="teams-display">
+                </div>
+        </div>
+    </div>
+
+    <audio id="card-flip-sound" src="cardfli.mp3" preload="auto"></audio> <audio id="team-complete-sound" src="teamcomplete.mp3" preload="auto"></audio> <script src="script.js" defer></script>
+</body>
+</html>
