@@ -197,7 +197,7 @@
     <script>
         // Quiz data (same as before)
         const quizData = [
-             {
+              {
                "question": "What is the basic structure of a Multi-Layer Perceptron (MLP)?",
                "options": ["Single layer", "Multiple layers of perceptrons", "Only output layer", "No hidden layers", "One neuron per layer", "Circular structure", "Single neuron"],
                "correctAnswer": "Multiple layers of perceptrons",
@@ -211,7 +211,125 @@
                "explanation": "Backpropagation adjusts weights based on errors to improve MLP predictions.",
                "hint": "It moves errors backward through the network."
              },
-              // ... (rest of the quizData array remains the same) ...
+             {
+               "question": "What does the activation function introduce into the network?",
+               "options": ["Linearity", "Non-linearity", "Overfitting", "Noise", "Clustering", "Normalization", "Bias"],
+               "correctAnswer": "Non-linearity",
+               "explanation": "Activation functions introduce non-linearity, allowing networks to solve complex problems.",
+               "hint": "Without it, networks behave like simple linear models."
+             },
+             {
+               "question": "Which activation function outputs between 0 and 1?",
+               "options": ["Tanh", "Sigmoid", "ReLU", "Softmax", "Leaky ReLU", "Linear", "ELU"],
+               "correctAnswer": "Sigmoid",
+               "explanation": "Sigmoid maps input values to a 0 to 1 range, often used for binary outputs.",
+               "hint": "It’s the S-shaped curve function."
+             },
+             {
+               "question": "Which activation function outputs between -1 and 1?",
+               "options": ["ReLU", "Tanh", "Sigmoid", "Softmax", "Step Function", "Swish", "Hard Sigmoid"],
+               "correctAnswer": "Tanh",
+               "explanation": "Tanh (Hyperbolic Tangent) centers data around zero with output between -1 and 1.",
+               "hint": "It's a shifted version of the sigmoid."
+             },
+             {
+               "question": "Which activation function is preferred to overcome the vanishing gradient problem?",
+               "options": ["Sigmoid", "Tanh", "Linear", "ReLU", "Softmax", "Leaky ReLU", "Step"],
+               "correctAnswer": "ReLU",
+               "explanation": "ReLU avoids vanishing gradients by outputting input directly if positive.",
+               "hint": "Think simple: outputs zero or the input itself."
+             },
+             {
+               "question": "What is the main idea behind Batch Normalization?",
+               "options": ["To remove hidden layers", "Normalize inputs during training", "Decrease dataset size", "Increase model complexity", "Simplify output", "Add regularization", "Prevent dropout"],
+               "correctAnswer": "Normalize inputs during training",
+               "explanation": "Batch normalization keeps input distributions stable, accelerating training.",
+               "hint": "It adjusts the mean and variance during training."
+             },
+             {
+               "question": "Which optimization technique updates weights after processing every sample?",
+               "options": ["Batch Gradient Descent", "Mini-batch Gradient Descent", "Stochastic Gradient Descent", "Newton's Method", "Adagrad", "Adam", "RMSprop"],
+               "correctAnswer": "Stochastic Gradient Descent",
+               "explanation": "SGD updates weights based on individual samples, adding randomness to training.",
+               "hint": "It's like making decisions sample-by-sample."
+             },
+             {
+               "question": "What kind of learning uses labeled data?",
+               "options": ["Supervised", "Unsupervised", "Reinforced", "Self-supervised", "Competitive", "Semi-supervised", "Clustering"],
+               "correctAnswer": "Supervised",
+               "explanation": "Supervised learning trains models using both input data and corresponding labels.",
+               "hint": "A teacher provides the answers."
+             },
+             {
+               "question": "In which learning method does the system adapt without labels?",
+               "options": ["Supervised", "Unsupervised", "Reinforcement", "Self-supervised", "Deep learning", "Batch learning", "Gradient learning"],
+               "correctAnswer": "Unsupervised",
+               "explanation": "Unsupervised learning identifies hidden patterns without any target output.",
+               "hint": "Learning happens without a teacher."
+             },
+             {
+               "question": "What is the main goal of Reinforcement Learning?",
+               "options": ["Predict classes", "Maximize rewards", "Cluster data", "Reduce variance", "Find errors", "Minimize cost", "Normalize data"],
+               "correctAnswer": "Maximize rewards",
+               "explanation": "Reinforcement learning agents act to maximize cumulative rewards.",
+               "hint": "Agents learn by getting feedback from actions."
+             },
+             {
+               "question": "Which method of learning adjusts weights by correlation of neurons?",
+               "options": ["Backpropagation", "Hebbian Learning", "Gradient Descent", "Competitive Learning", "Reinforcement Learning", "Error Correction", "K-means"],
+               "correctAnswer": "Hebbian Learning",
+               "explanation": "Hebbian learning is based on the idea that neurons that fire together wire together.",
+               "hint": "Old biological rule of thumb."
+             },
+             {
+               "question": "Gradient Descent is mainly used for?",
+               "options": ["Maximizing error", "Minimizing error", "Increasing weights", "Decreasing bias", "Improving noise", "Normalizing input", "Batch splitting"],
+               "correctAnswer": "Minimizing error",
+               "explanation": "Gradient descent updates parameters to minimize the model’s error function.",
+               "hint": "It steps downhill on an error surface."
+             },
+             {
+               "question": "Which type of Gradient Descent uses the whole dataset for one update?",
+               "options": ["Mini-batch GD", "Stochastic GD", "Batch GD", "Momentum GD", "Adam", "SGD", "Adadelta"],
+               "correctAnswer": "Batch GD",
+               "explanation": "Batch Gradient Descent uses the full dataset to compute the gradient at each iteration.",
+               "hint": "It processes everything at once."
+             },
+             {
+               "question": "What is the effect of a small learning rate?",
+               "options": ["Fast convergence", "Slow convergence", "Overshooting minima", "Better generalization", "Poor initialization", "Quick saturation", "Faster noise reduction"],
+               "correctAnswer": "Slow convergence",
+               "explanation": "Too small a learning rate causes the model to converge very slowly.",
+               "hint": "The model tiptoes toward the solution."
+             },
+             {
+               "question": "What does a large learning rate risk?",
+               "options": ["Missing the minimum", "Overfitting", "Noise in training", "Slow training", "Underfitting", "High bias", "Large batch size"],
+               "correctAnswer": "Missing the minimum",
+               "explanation": "Large learning rates might skip over the minimum, causing oscillations.",
+               "hint": "Imagine a ball bouncing over the valley."
+             },
+             {
+               "question": "What is one advantage of Mini-Batch Gradient Descent?",
+               "options": ["No noise", "Uses full data only", "Faster computation and convergence", "Slower training", "Better at overfitting", "Lower memory usage", "No convergence"],
+               "correctAnswer": "Faster computation and convergence",
+               "explanation": "Mini-batches balance noise reduction and computational efficiency.",
+               "hint": "A middle ground between SGD and Batch GD."
+             },
+             {
+               "question": "Which optimization algorithm is an improved version of SGD with adaptive learning rates?",
+               "options": ["Adam", "Batch Gradient Descent", "Adadelta", "Mini-batch Gradient Descent", "Newton’s Method", "Momentum", "Nadam"],
+               "correctAnswer": "Adam",
+               "explanation": "Adam optimizer adjusts learning rates automatically during training.",
+               "hint": "Popular for deep learning — starts with an 'A'."
+             },
+             {
+               "question": "What is dropout mainly used to prevent?",
+               "options": ["Underfitting", "Overfitting", "Noise addition", "Loss of data", "Low bias", "Data normalization", "Fast training"],
+               "correctAnswer": "Overfitting",
+               "explanation": "Dropout randomly deactivates neurons during training to reduce overfitting.",
+               "hint": "Think about 'forgetting' some neurons."
+             },
              {
                "question": "What does L2 Regularization penalize?",
                "options": ["Weights", "Biases", "Gradients", "Learning Rate", "Input Data", "Batch Size", "Hidden Layers"],
